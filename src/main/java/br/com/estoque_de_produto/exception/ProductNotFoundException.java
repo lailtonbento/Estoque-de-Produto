@@ -1,4 +1,4 @@
-package br.com.Estoquedeproduto.exception;
+package br.com.estoque_de_produto.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
