@@ -1,4 +1,4 @@
-package br.com.estoque_de_produto;
+package br.com.estoqueproduto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
