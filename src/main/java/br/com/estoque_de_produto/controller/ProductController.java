@@ -3,6 +3,7 @@ package br.com.estoque_de_produto.controller;
 import br.com.estoque_de_produto.model.dto.ProductDTO;
 import br.com.estoque_de_produto.service.ProductService;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -16,20 +17,15 @@ import javax.validation.Valid;
 
 @RequestMapping("/api/v1/produtos")
 @RestController
+@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> findAllPageable(
             @PageableDefault(page = 0, sort = {"nome"}) Pageable pageable) {
         return ResponseEntity.ok(productService.findAll(pageable));
-
     }
 
     @GetMapping("/{id}")
