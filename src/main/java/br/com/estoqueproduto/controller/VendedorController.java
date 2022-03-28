@@ -1,7 +1,8 @@
 package br.com.estoqueproduto.controller;
 
-import br.com.estoqueproduto.model.dto.ProductDTO;
-import br.com.estoqueproduto.service.ProductService;
+
+import br.com.estoqueproduto.model.dto.VendedorDTO;
+import br.com.estoqueproduto.service.VendedorService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,47 +22,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
-@RequestMapping("/api/v1/produtos")
 @RestController
+@RequestMapping("/api/v1/vendedores")
 @RequiredArgsConstructor
 @CrossOrigin
-public class ProductController {
+public class VendedorController {
 
-	private final ProductService productService;
+	private final VendedorService vendedorService;
 
 	@GetMapping
-	public ResponseEntity<Page<ProductDTO>> findAllPageable(
+	public ResponseEntity<Page<VendedorDTO>> findAllPageable(
 			@PageableDefault(page = 0, sort = {"nome"}) Pageable pageable) {
-		return ResponseEntity.ok(productService.findAll(pageable));
+		return ResponseEntity.ok(vendedorService.findAllPageable(pageable));
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ProductDTO> findById(@PathVariable("id") Long id) {
-		return ResponseEntity.ok(productService.findById(id));
+	public ResponseEntity<VendedorDTO> findById(@PathVariable("id") Long id) {
+		return ResponseEntity.ok(vendedorService.findById(id));
 	}
 
+
 	@PutMapping("/{id}")
-	public ProductDTO update(@PathVariable Long id, @Valid @RequestBody ProductDTO productDTO) {
-		return productService.update(id, productDTO);
+	public VendedorDTO update(@PathVariable Long id, @Valid @RequestBody VendedorDTO vendedorDTO) {
+		return vendedorService.update(id, vendedorDTO);
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
-	public ProductDTO save(@Valid @RequestBody ProductDTO productDTO) {
-		return productService.createProduct(productDTO);
+	public VendedorDTO save(@Valid @RequestBody VendedorDTO vendedorDTO) {
+		return vendedorService.createVendedor(vendedorDTO);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteById(@PathVariable Long id) {
-		productService.deleteById(id);
+		vendedorService.deleteById(id);
 	}
 
 	@DeleteMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteByIds(@RequestParam Long[] ids) {
-		productService.deleteByIds(ids);
+		vendedorService.deleteByIds(ids);
 	}
 
 }

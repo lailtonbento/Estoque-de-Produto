@@ -1,6 +1,7 @@
 package br.com.estoqueproduto.repository;
 
 import br.com.estoqueproduto.model.Product;
+import java.util.Collection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	// @Query(value = "EXISTS (SELECT * from produtos where produtos.id = ?1)", nativeQuery = true)
 	boolean existsById(Long id);
+
+	boolean existsByIdIn(Collection<Long> ids);
 
 }

@@ -5,6 +5,8 @@ import br.com.estoqueproduto.exception.ProductNotFoundException;
 import br.com.estoqueproduto.model.Product;
 import br.com.estoqueproduto.model.dto.ProductDTO;
 import br.com.estoqueproduto.repository.ProductRepository;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
@@ -51,5 +53,19 @@ public class ProductService {
 			throw new ProductNotFoundException(id);
 		}
 	}
+
+	@SneakyThrows
+	private void existsByIds(Long[] ids) {
+		if (!productRepository.existsByIdIn(Arrays.stream(ids).collect(Collectors.toList()))) {
+			throw new ProductNotFoundException(Arrays.stream(ids).map(String::valueOf).collect(Collectors.joining(", ")));
+		}
+	}
+
+
+	public void deleteByIds(Long[] ids) {
+		existsByIds(ids);
+		productRepository.deleteAllById(Arrays.stream(ids).collect(Collectors.toList()));
+	}
+
 
 }
