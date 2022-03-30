@@ -32,12 +32,12 @@ public class VendedorController {
 
 	@GetMapping
 	public ResponseEntity<Page<VendedorDTO>> findAllPageable(
-			@PageableDefault(page = 0, sort = {"nome"}) Pageable pageable) {
+			@PageableDefault(sort = {"nome"}) Pageable pageable) {
 		return ResponseEntity.ok(vendedorService.findAllPageable(pageable));
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<VendedorDTO> findById(@PathVariable("id") Long id) {
+	public ResponseEntity<VendedorDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(vendedorService.findById(id));
 	}
 

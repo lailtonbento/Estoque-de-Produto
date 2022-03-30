@@ -56,7 +56,7 @@ public class VendedorService {
 
 	@SneakyThrows
 	private void existsByIds(Long[] ids) {
-		if (!vendedorRepository.existsByIds(Arrays.stream(ids).collect(Collectors.toList()))) {
+		if (!vendedorRepository.existsByIdIn(Arrays.stream(ids).collect(Collectors.toList()))) {
 			throw new VendedorNotFoundException(Arrays.stream(ids).map(String::valueOf).collect(Collectors.joining(", ")));
 		}
 	}

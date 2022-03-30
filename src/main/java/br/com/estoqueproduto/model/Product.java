@@ -2,11 +2,14 @@ package br.com.estoqueproduto.model;
 
 
 import br.com.estoqueproduto.model.dto.ProductDTO;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,16 +23,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "produtos")
+@Table(name = "produto")
 @Builder
 public class Product {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@ManyToMany(mappedBy = "produtos")
+	public Set<Vendedor> vendedores = new HashSet<>();
 
 
-	@Column(nullable = false)
 	private String nome;
 
 	@Column(nullable = false)
@@ -37,6 +38,10 @@ public class Product {
 
 	@Column(nullable = false)
 	private String revendedor;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "produto_id")
+	private Long id;
 
 	public ProductDTO toDTO() {
 		return ProductDTO.builder()
@@ -44,6 +49,7 @@ public class Product {
 				.marca(marca)
 				.nome(nome)
 				.revendedor(revendedor)
+				.vendedores(vendedores)
 				.build();
 	}
 

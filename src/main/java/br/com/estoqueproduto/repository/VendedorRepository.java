@@ -10,5 +10,5 @@ public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
 
 	boolean existsById(Long id);
 
-	boolean existsByIds(Collection<Long> ids);
+	boolean existsByIdIn(Collection<Long> ids);
 }
