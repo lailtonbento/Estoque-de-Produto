@@ -6,6 +6,7 @@ import br.com.estoqueproduto.model.Vendedor;
 import br.com.estoqueproduto.model.dto.VendedorDTO;
 import br.com.estoqueproduto.repository.VendedorRepository;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -22,6 +23,10 @@ public class VendedorService {
 
 	public Page<VendedorDTO> findAllPageable(Pageable pageable) {
 		return vendedorRepository.findAll(pageable).map(Vendedor::toDTO);
+	}
+
+	public List<VendedorDTO> findAll() {
+		return vendedorRepository.findAll().stream().map(Vendedor::toDTO).collect(Collectors.toList());
 	}
 
 	public VendedorDTO createVendedor(VendedorDTO vendedorDTO) {

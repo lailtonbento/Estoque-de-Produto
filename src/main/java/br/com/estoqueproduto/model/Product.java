@@ -27,10 +27,6 @@ import lombok.Setter;
 @Builder
 public class Product {
 
-	@ManyToMany(mappedBy = "produtos")
-	public Set<Vendedor> vendedores = new HashSet<>();
-
-
 	private String nome;
 
 	@Column(nullable = false)
@@ -42,6 +38,10 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "produto_id")
 	private Long id;
+
+	@ManyToMany(mappedBy = "produtos")
+	public Set<Vendedor> vendedores = new HashSet<>();
+
 
 	public ProductDTO toDTO() {
 		return ProductDTO.builder()

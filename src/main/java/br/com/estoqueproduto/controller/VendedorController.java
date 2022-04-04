@@ -3,6 +3,7 @@ package br.com.estoqueproduto.controller;
 
 import br.com.estoqueproduto.model.dto.VendedorDTO;
 import br.com.estoqueproduto.service.VendedorService;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,13 +33,18 @@ public class VendedorController {
 
 	@GetMapping
 	public ResponseEntity<Page<VendedorDTO>> findAllPageable(
-			@PageableDefault(sort = {"nome"}) Pageable pageable) {
+			@PageableDefault(page = 0, sort = {"nome"}) Pageable pageable) {
 		return ResponseEntity.ok(vendedorService.findAllPageable(pageable));
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<VendedorDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(vendedorService.findById(id));
+	}
+
+	@GetMapping("all")
+	public ResponseEntity<List<VendedorDTO>> findAll() {
+		return ResponseEntity.ok(vendedorService.findAll());
 	}
 
 
