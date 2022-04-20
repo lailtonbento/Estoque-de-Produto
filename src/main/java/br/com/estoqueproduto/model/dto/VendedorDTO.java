@@ -5,8 +5,6 @@ import br.com.estoqueproduto.model.Product;
 import br.com.estoqueproduto.model.Vendedor;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +15,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VendedorDTO {
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 
 	@NotBlank(message = "Nome do vendedor é necessário.")
