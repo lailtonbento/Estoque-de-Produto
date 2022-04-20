@@ -34,8 +34,9 @@ public class Product {
 
 	@Column(nullable = false)
 	private String revendedor;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "produto_id")
 	private Long id;
 
